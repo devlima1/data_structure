@@ -38,14 +38,21 @@ void insert_at_end(struct node **head, struct node **temp){
 
 void insert_after_a_giver_locate(){}
 
+void list_elements(struct node **head){
+    struct node *temp = *head;
+
+    while(temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+
 void count_elements(struct node **head){
-    struct node *temp;
-    temp = *head;
+    struct node *temp = *head;
 
     int count = 0;
 
     while(temp != NULL) {
-        printf("%d ", temp->data);
         temp = temp->next;
         count++;
     }
@@ -80,6 +87,7 @@ int main() {
     }
     insert_at_beginning(&head);    
     insert_at_end(&head, &temp);
+    list_elements(&head);
     count_elements(&head);
     /*temp = head;
     while (temp != NULL) {

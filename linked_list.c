@@ -9,7 +9,7 @@ struct node {
 void insert_at_beginning(struct node **head){
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
-    printf("Enter data u want to insert: ");
+    printf("Enter data u want to insert at beginning: ");
     scanf("%d", &new_node->data);
 
     if(*head == NULL) {
@@ -20,8 +20,25 @@ void insert_at_beginning(struct node **head){
     }
 }
 
-void insert_at_end(){}
+void insert_at_end(struct node **head, struct node **temp){
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
+
+    printf("Enter data u want to insert at end: ");
+    scanf("%d", &new_node->data);
+
+    new_node->next = NULL;
+
+    if(*head == NULL) {
+        *head = *temp = new_node;
+    } else {
+        (*temp)->next = new_node; 
+        *temp = new_node;
+    }
+}
+
 void insert_after_a_giver_locate(){}
+
+void black(){}
 
 int main() {
     struct node *head = NULL;
@@ -50,6 +67,7 @@ int main() {
         count++;
     }
     insert_at_beginning(&head);    
+    insert_at_end(&head, &temp);
 
     temp = head;
     while (temp != NULL) {

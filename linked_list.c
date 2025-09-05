@@ -29,31 +29,34 @@ void insert_at_end(struct node **head, struct node **temp){
     new_node->next = NULL;
 
     if(*head == NULL) {
-        *head = *temp = new_node;
+        *head = new_node;
     } else {
+        *temp = *head;
+        while(*temp != NULL) {
+            *temp = (*temp)->next;
+        }
         (*temp)->next = new_node; 
-        *temp = new_node;
     }
 }
 
 void insert_after_a_giver_locate(){}
 
 void list_elements(struct node **head){
-    struct node *temp = *head;
+    struct node *i = *head;
 
-    while(temp != NULL) {
-        printf("%d ", temp->data);
-        temp = temp->next;
+    while(i != NULL) {
+        printf("%d ", i->data);
+        i = i->next;
     }
 }
 
 void count_elements(struct node **head){
-    struct node *temp = *head;
+    struct node *j = *head;
 
     int count = 0;
 
-    while(temp != NULL) {
-        temp = temp->next;
+    while(j != NULL) {
+        j = j->next;
         count++;
     }
     printf("Size: %d", count);

@@ -32,7 +32,7 @@ void insert_at_end(struct node **head, struct node **temp){
         *head = new_node;
     } else {
         *temp = *head;
-        while(*temp != NULL) {
+        while((*temp)->next != NULL) {
             *temp = (*temp)->next;
         }
         (*temp)->next = new_node; 

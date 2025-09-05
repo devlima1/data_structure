@@ -33,9 +33,9 @@ void insert_at_end(struct node **head, struct node **temp){
     } else {
         *temp = *head;
         while((*temp)->next != NULL) {
-            *temp = (*temp)->next;
+            *temp = (*temp)->next; 
         }
-        (*temp)->next = new_node; 
+        (*temp)->next = new_node;
     }
 }
 
@@ -66,10 +66,42 @@ int main() {
     struct node *head = NULL;
     struct node *new_node = NULL;
     struct node *temp = NULL;
-    int choice = 1;
+    int choice;
     int count = 0;
 
-    while (choice == 1) {
+    do {
+        printf("1. Insert at beginning\n");
+        printf("2. Insert at end\n");
+        printf("3. Insert after a giver location\n");
+        printf("4. List elements\n");
+        printf("5. Count elements\n");
+        printf("0. Left\n");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 0:
+                printf("tchau");
+                break;
+            case 1:
+                insert_at_beginning(&head);
+                break;
+            case 2:
+                insert_at_end(&head, &temp);
+                break;
+            case 3:
+                insert_after_a_giver_locate();
+                break;
+            case 4:
+                list_elements(&head);
+                break;
+            case 5:
+                count_elements(&head);
+                break;
+            default:
+                printf("Invalid choice");
+                break;
+        }
+        /*
         new_node = (struct node *) malloc(sizeof(struct node));
 
         printf("Enter data: ");
@@ -87,11 +119,12 @@ int main() {
         printf("Do you want continue(0, 1)? ");
         scanf("%d", &choice);
         count++;
-    }
-    insert_at_beginning(&head);    
+    */
+    } while(choice != 0);
+    /*insert_at_beginning(&head);    
     insert_at_end(&head, &temp);
     list_elements(&head);
-    count_elements(&head);
+    count_elements(&head);*/
     /*temp = head;
     while (temp != NULL) {
         printf("%d ", temp->data);

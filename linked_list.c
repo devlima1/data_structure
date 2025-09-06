@@ -39,11 +39,43 @@ void insert_at_end(struct node **head, struct node **temp){
     }
 }
 
-void insert_after_a_giver_locate(){}
+void insert_after_a_giver_locate(struct node **head){
+    struct node *temp = *head;
+    int pos;
+    int count;
+    int i;
+   
+    while(temp != NULL) {
+        temp = temp->next;
+        count++;
+    }
+
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+ 
+    if (pos > count || pos < 0) {
+        printf("Invalid position");
+    } else {
+        struct node *new_node = (struct node *) malloc(sizeof(struct node));
+
+        printf("Enter data: ");
+        scanf("%d", &new_node->data);
+        
+        temp = *head;
+        pos = 1;
+        while(i != pos) {
+            temp = temp->next;
+            i++;
+        }
+        new_node->next = temp->next;
+        temp->next = new_node; 
+    }
+}
 
 void list_elements(struct node **head){
     struct node *i = *head;
 
+    printf("List of all the elements: ");
     while(i != NULL) {
         printf("%d ", i->data);
         i = i->next;
@@ -51,15 +83,15 @@ void list_elements(struct node **head){
 }
 
 void count_elements(struct node **head){
-    struct node *j = *head;
+    struct node *temp = *head;
 
     int count = 0;
 
-    while(j != NULL) {
-        j = j->next;
+    while(temp != NULL) {
+        temp = temp->next;
         count++;
     }
-    printf("Size: %d", count);
+    printf("Size: %d\n", count);
 }
 
 int main() {
@@ -70,7 +102,7 @@ int main() {
     int count = 0;
 
     do {
-        printf("1. Insert at beginning\n");
+        printf("\n1. Insert at beginning\n");
         printf("2. Insert at end\n");
         printf("3. Insert after a giver location\n");
         printf("4. List elements\n");
@@ -89,7 +121,7 @@ int main() {
                 insert_at_end(&head, &temp);
                 break;
             case 3:
-                insert_after_a_giver_locate();
+                insert_after_a_giver_locate(&head);
                 break;
             case 4:
                 list_elements(&head);

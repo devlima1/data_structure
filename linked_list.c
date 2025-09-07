@@ -43,8 +43,8 @@ void insert_after_a_giver_locate(struct node **head){
     struct node *temp = *head;
     int pos;
     int count;
-    int i;
-   
+    int i = 1;
+
     while(temp != NULL) {
         temp = temp->next;
         count++;
@@ -52,23 +52,28 @@ void insert_after_a_giver_locate(struct node **head){
 
     printf("Enter the position: ");
     scanf("%d", &pos);
- 
-    if (pos > count || pos < 0) {
+
+    if (pos < 0 || pos > count) {
         printf("Invalid position");
     } else {
         struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
         printf("Enter data: ");
         scanf("%d", &new_node->data);
-        
-        temp = *head;
-        pos = 1;
-        while(i != pos) {
-            temp = temp->next;
-            i++;
+
+      if(pos == 0) {
+            new_node->next = *head;
+            *head = new_node;
+        } else {
+            temp = *head;
+
+            while(i < pos) {
+                temp = temp->next;
+                i++;
+            }
+            new_node->next = temp->next;
+            temp->next = new_node;
         }
-        new_node->next = temp->next;
-        temp->next = new_node; 
     }
 }
 

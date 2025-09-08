@@ -77,7 +77,25 @@ void insert_after_a_giver_locate(struct node **head){
     }
 }
 
-void list_elements(struct node **head){
+void delete_from_beginning(struct node **head){
+    struct node *temp = *head;
+    
+    if(*head == NULL) {
+        printf("List is empty.");
+    } else {
+        *head = temp->next;
+
+        free(temp);
+        temp = NULL;
+
+        printf("Node deleted.");
+    }
+}
+
+void delete_from_end(){}
+void delete_from_specified_position(){}
+
+void display(struct node **head){
     struct node *i = *head;
 
     printf("List of all the elements: ");
@@ -87,7 +105,7 @@ void list_elements(struct node **head){
     }
 }
 
-void count_elements(struct node **head){
+void size(struct node **head){
     struct node *temp = *head;
 
     int count = 0;
@@ -110,8 +128,11 @@ int main() {
         printf("\n1. Insert at beginning\n");
         printf("2. Insert at end\n");
         printf("3. Insert after a giver location\n");
-        printf("4. List elements\n");
-        printf("5. Count elements\n");
+        printf("4. Deleted from beginning\n");
+        printf("5. Deleted from end\n");
+        printf("6. Deleted from specified position\n");
+        printf("7. List elements\n");
+        printf("8. Count elements\n");
         printf("0. Left\n");
         scanf("%d", &choice);
 
@@ -129,10 +150,17 @@ int main() {
                 insert_after_a_giver_locate(&head);
                 break;
             case 4:
-                list_elements(&head);
+                delete_from_beginning(&head);
                 break;
             case 5:
-                count_elements(&head);
+                break;
+            case 6:
+                break;
+            case 7:
+                display(&head);
+                break;
+            case 8:
+                size(&head);
                 break;
             default:
                 printf("Invalid choice");

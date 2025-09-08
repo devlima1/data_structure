@@ -92,7 +92,25 @@ void delete_from_beginning(struct node **head){
     }
 }
 
-void delete_from_end(){}
+void delete_from_end(struct node **head) {
+    struct node *temp = *head;
+    struct node *prev = NULL;
+
+    if(temp == NULL) {
+        printf("List is empty");
+    } else {
+        while(temp->next != NULL) {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = NULL;
+        free(temp);
+        temp = NULL;
+
+        printf("Node deleted");
+    }
+}
+
 void delete_from_specified_position(){}
 
 void display(struct node **head){
@@ -161,6 +179,7 @@ int main() {
                 delete_from_beginning(&head);
                 break;
             case 5:
+                delete_from_end(&head);
                 break;
             case 6:
                 break;

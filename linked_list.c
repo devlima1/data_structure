@@ -96,25 +96,33 @@ void delete_from_end(){}
 void delete_from_specified_position(){}
 
 void display(struct node **head){
-    struct node *i = *head;
+    struct node *temp = *head;
+    
+    if (temp == NULL) {
+        printf("List is empty.");
+    } else {
+        printf("List: ");
 
-    printf("List of all the elements: ");
-    while(i != NULL) {
-        printf("%d ", i->data);
-        i = i->next;
+        while(temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
     }
 }
 
 void size(struct node **head){
     struct node *temp = *head;
-
     int count = 0;
 
-    while(temp != NULL) {
-        temp = temp->next;
-        count++;
+    if(temp == NULL) {
+        printf("List is empty.");
+    } else {
+        while(temp != NULL) {
+            count++;
+            temp = temp->next;
+        }
+        printf("Size: %d", count);
     }
-    printf("Size: %d\n", count);
 }
 
 int main() {

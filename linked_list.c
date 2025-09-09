@@ -92,18 +92,27 @@ void delete_from_beginning(struct node **head){
     }
 }
 
-void delete_from_end(struct node **head) {
+void delete_from_end(struct node **head){
     struct node *temp = *head;
-    struct node *prev = NULL;
-
-    if(temp == NULL) {
+    
+    if(*head == NULL) {
         printf("List is empty");
+    }else if (temp->next == NULL){
+        *head = temp->next;
+
+        free(temp);
+        temp = NULL;
+
+        printf("Node deleted");
     } else {
+        struct node *prev = NULL;
+
         while(temp->next != NULL) {
             prev = temp;
             temp = temp->next;
         }
-        prev->next = NULL;
+        prev->next = temp->next;
+
         free(temp);
         temp = NULL;
 
@@ -111,7 +120,45 @@ void delete_from_end(struct node **head) {
     }
 }
 
-void delete_from_specified_position(){}
+void delete_from_specified_position(struct node **head){
+    struct node *temp = *head;
+    int pos;
+    int count = 0;
+    int i = 1;
+    
+    while(temp != NULL) {
+        temp = temp->next;
+        count++;
+    }
+
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+    
+    if(pos <= 0 || pos > count) {
+        printf("Invalid position");
+    } else if(pos == 1) {
+        temp = *head;
+        *head = temp->next;
+
+        free(temp);
+        temp = NULL;
+
+        printf("Node deleted");
+    } else {
+        temp = *head;
+        while (i < pos - 1) {
+            temp = temp->next;
+            i++;
+        }
+        struct node *next_node = temp->next;
+        temp->next = next_node->next;
+
+        free(next_node);
+        next_node = NULL;
+
+        printf("Node deleted");
+    }
+}
 
 void display(struct node **head){
     struct node *temp = *head;
@@ -182,6 +229,7 @@ int main() {
                 delete_from_end(&head);
                 break;
             case 6:
+                delete_from_specified_position(&head);
                 break;
             case 7:
                 display(&head);

@@ -6,7 +6,7 @@ struct node {
     struct node *next;
 };
 
-void insert_at_beginning(struct node **head){
+void insert_at_beginning(struct node **head) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     printf("Enter data u want to insert at beginning: ");
@@ -20,7 +20,7 @@ void insert_at_beginning(struct node **head){
     }
 }
 
-void insert_at_end(struct node **head, struct node **temp){
+void insert_at_end(struct node **head, struct node **temp) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     printf("Enter data u want to insert at end: ");
@@ -39,7 +39,7 @@ void insert_at_end(struct node **head, struct node **temp){
     }
 }
 
-void insert_after_a_giver_locate(struct node **head){
+void insert_after_a_giver_locate(struct node **head) {
     struct node *temp = *head;
     int pos;
     int count;
@@ -77,7 +77,7 @@ void insert_after_a_giver_locate(struct node **head){
     }
 }
 
-void delete_from_beginning(struct node **head){
+void delete_from_beginning(struct node **head) {
     struct node *temp = *head;
     
     if(*head == NULL) {
@@ -92,7 +92,7 @@ void delete_from_beginning(struct node **head){
     }
 }
 
-void delete_from_end(struct node **head){
+void delete_from_end(struct node **head) {
     struct node *temp = *head;
     
     if(*head == NULL) {
@@ -120,7 +120,7 @@ void delete_from_end(struct node **head){
     }
 }
 
-void delete_from_specified_position(struct node **head){
+void delete_from_specified_position(struct node **head) {
     struct node *temp = *head;
     int pos;
     int count = 0;
@@ -160,7 +160,20 @@ void delete_from_specified_position(struct node **head){
     }
 }
 
-void display(struct node **head){
+void reverse(struct node **head) {
+    struct node *prev_node = NULL;
+    struct node *current_node = *head, *next_node = *head;
+
+    while (current_node != NULL) {
+        next_node = current_node->next;
+        current_node->next = prev_node;
+        prev_node = current_node;
+        current_node = next_node;
+    }
+    *head = prev_node; 
+}
+
+void display(struct node **head) {
     struct node *temp = *head;
     
     if (temp == NULL) {
@@ -175,7 +188,7 @@ void display(struct node **head){
     }
 }
 
-void size(struct node **head){
+void size(struct node **head) {
     struct node *temp = *head;
     int count = 0;
 
@@ -206,6 +219,7 @@ int main() {
         printf("6. Deleted from specified position\n");
         printf("7. List elements\n");
         printf("8. Count elements\n");
+        printf("9. Reverse\n");
         printf("0. Left\n");
         scanf("%d", &choice);
 
@@ -236,6 +250,9 @@ int main() {
                 break;
             case 8:
                 size(&head);
+                break;
+            case 9:
+                reverse(&head);
                 break;
             default:
                 printf("Invalid choice");

@@ -258,37 +258,8 @@ int main() {
                 printf("Invalid choice");
                 break;
         }
-        /*
-        new_node = (struct node *) malloc(sizeof(struct node));
-
-        printf("Enter data: ");
-        scanf("%d", &new_node->data);
-
-        new_node->next = NULL;
-
-        if (head == NULL) {
-            head = temp = new_node; 
-        } else {
-            temp->next = new_node;
-            temp = new_node;
-        }
-
-        printf("Do you want continue(0, 1)? ");
-        scanf("%d", &choice);
-        count++;
-    */
     } while(choice != 0);
-    /*insert_at_beginning(&head);    
-    insert_at_end(&head, &temp);
-    list_elements(&head);
-    count_elements(&head);*/
-    /*temp = head;
-    while (temp != NULL) {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
-    printf("\nSize: %d", count);
-    */
+
     free(new_node);
     free(head);
     new_node = NULL;

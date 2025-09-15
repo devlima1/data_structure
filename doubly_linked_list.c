@@ -26,3 +26,12 @@ void create(struct node **head, struct node **temp) {
         *temp = new_node;
     }
 }
+
+void display(struct node **head, struct node **temp) {
+    *temp = *head;
+
+    while(*temp != NULL) {
+        printf("%d", (*temp)->data);
+        *temp = (*temp)->next;
+    }
+}

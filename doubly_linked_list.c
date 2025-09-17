@@ -11,7 +11,7 @@ struct node *head = NULL;
 struct node *temp = NULL;
 struct node *tail = NULL;
 
-void create(struct node **head, struct node **temp, struct node **tail) {
+void create(struct node **head, struct node **tail) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     printf("Enter data:");
@@ -20,11 +20,10 @@ void create(struct node **head, struct node **temp, struct node **tail) {
     new_node->next = NULL;
 
     if(*head == NULL) {
-        *head = *temp = *tail = new_node;
+        *head = *tail = new_node;
     } else {
-        (*temp)->next = new_node;
-        new_node->prev = *temp;
-        *temp = new_node;
+        (*tail)->next = new_node;
+        new_node->prev = *tail;
         *tail = new_node;
     }
 }

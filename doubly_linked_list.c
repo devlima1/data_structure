@@ -37,7 +37,7 @@ void display(struct node **head, struct node **temp) {
     }
 }
 
-void insert_to_beginning(struct node **head) {
+void insert_at_beginning(struct node **head, struct node **tail) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
     
     printf("Enter data:");
@@ -46,10 +46,11 @@ void insert_to_beginning(struct node **head) {
     new_node->prev = NULL;
     
     if(*head == NULL) {
-        *head = new_node;
+        *head = *tail = new_node;
     } else {
         (*head)->prev = new_node;
         new_node->next = *head;
         *head = new_node;
     }
 }
+

@@ -54,3 +54,19 @@ void insert_at_beginning(struct node **head, struct node **tail) {
     }
 }
 
+void inset_at_end(struct node **head, struct node **tail) {
+    struct node *new_node = (struct node *) malloc(sizeof(struct node));
+
+    printf("Enter data:");
+    scanf("%d", &new_node->data);
+    new_node->next = NULL;
+    new_node->prev = NULL;
+
+    if(*head == NULL) {
+        *head = *tail = new_node;
+    } else {
+        (*tail)->prev = new_node;
+        new_node->prev = *tail;
+        *tail = new_node;
+    }
+}

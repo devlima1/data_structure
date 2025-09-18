@@ -77,7 +77,7 @@ void insert_at_end(struct node **head, struct node **tail) {
     if(*head == NULL) {
         *head = *tail = new_node;
     } else {
-        (*tail)->prev = new_node;
+        (*tail)->next = new_node;
         new_node->prev = *tail;
         *tail = new_node;
     }

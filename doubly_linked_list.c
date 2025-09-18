@@ -32,7 +32,7 @@ void display(struct node **head, struct node **temp) {
     *temp = *head;
 
     while(*temp != NULL) {
-        printf("%d", (*temp)->data);
+        printf("%d ", (*temp)->data);
         *temp = (*temp)->next;
     }
 }
@@ -66,7 +66,7 @@ void insert_at_beginning(struct node **head, struct node **tail) {
     }
 }
 
-void inset_at_end(struct node **head, struct node **tail) {
+void insert_at_end(struct node **head, struct node **tail) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
 
     printf("Enter data:");
@@ -145,4 +145,53 @@ void insert_after_position(struct node **head, struct node **tail) {
         temp->next = new_node;
         new_node->next->prev = new_node;
     }
+}
+
+int main() {
+    int choice;
+    int list_size;
+
+    do {
+        printf("\n1. Create\n");
+        printf("2. Display\n"); 
+        printf("3. Size\n");
+        printf("4. Insert at beginning\n");
+        printf("5. Insert at end\n");
+        printf("6. Insert at position\n");
+        printf("7. Insert after position\n");
+        printf("0. Quit\n");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                create(&head, &tail);
+                break;
+            case 2:
+                display(&head, &temp);
+                break;
+            case 3:
+                list_size = size(&head);
+                printf("%d", list_size);
+                break;
+            case 4:
+                insert_at_beginning(&head, &tail);
+                break;
+            case 5:
+                insert_at_end(&head, &tail);
+                break;
+            case 6:
+                insert_at_position(&head, &tail);
+                break;
+            case 7:
+                insert_after_position(&head, &tail);
+                break;
+            default:
+                printf("Invalid choice");
+            case 0:
+                printf("Bye");
+                break;
+        }
+    }while(choice!=0);
+
+    return 0;
 }

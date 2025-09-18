@@ -37,6 +37,18 @@ void display(struct node **head, struct node **temp) {
     }
 }
 
+int size(struct node **head) {
+    struct node *temp = *head;
+    int size;
+
+    while(temp != NULL) {
+        temp = temp->next;
+        size++;
+    }
+
+    return size;
+}
+
 void insert_at_beginning(struct node **head, struct node **tail) {
     struct node *new_node = (struct node *) malloc(sizeof(struct node));
     
@@ -70,3 +82,4 @@ void inset_at_end(struct node **head, struct node **tail) {
         *tail = new_node;
     }
 }
+

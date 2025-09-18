@@ -115,3 +115,34 @@ void insert_at_position(struct node **head, struct node **tail) {
         new_node->next->prev = new_node;
     }
 }
+
+void insert_after_position(struct node **head, struct node **tail) {
+    int pos;
+
+    printf("Enter position:");
+    scanf("%d", &pos);
+
+    int list_size = size(head);
+
+    if(pos < 1 || pos > list_size) {
+        printf("Invalid position");
+   } else {
+        struct node *new_node = (struct node *) malloc(sizeof(struct node)); 
+
+        printf("Enter data:");
+        scanf("%d", &new_node->data);
+        
+        struct node *temp = *head;
+        int i = 1;
+
+        while (i < pos) {
+            temp = temp->next;
+            i++;
+        }
+
+        new_node->prev = temp;
+        new_node->next = temp->next;
+        temp->next = new_node;
+        new_node->next->prev = new_node;
+    }
+}

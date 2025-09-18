@@ -39,7 +39,7 @@ void display(struct node **head, struct node **temp) {
 
 int size(struct node **head) {
     struct node *temp = *head;
-    int size;
+    int size = 0;
 
     while(temp != NULL) {
         temp = temp->next;
@@ -83,3 +83,35 @@ void inset_at_end(struct node **head, struct node **tail) {
     }
 }
 
+void insert_at_position(struct node **head, struct node **tail) {
+    int pos;
+
+    printf("Enter position:");
+    scanf("%d", &pos);
+
+    int list_size = size(head);
+
+    if(pos < 1 || pos > list_size) {
+        printf("Invalid position");
+    } else if (pos == 1) {
+        insert_at_beginning(head, tail);
+    } else {
+        struct node *new_node = (struct node *) malloc(sizeof(struct node)); 
+
+        printf("Enter data:");
+        scanf("%d", &new_node->data);
+        
+        struct node *temp = *head;
+        int i = 1;
+
+        while (i < pos - 1) {
+            temp = temp->next;
+            i++;
+        }
+
+        new_node->prev = temp;
+        new_node->next = temp->next;
+        temp->next = new_node;
+        new_node->next->prev = new_node;
+    }
+}

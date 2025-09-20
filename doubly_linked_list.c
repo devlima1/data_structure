@@ -147,6 +147,16 @@ void insert_after_position(struct node **head, struct node **tail) {
     }
 }
 
+void delete_from_beginning() {}
+void delete_from_end(struct node **tail) {
+    *tail = (*tail)->prev;
+    free((*tail)->next);
+    (*tail)->next = NULL;
+}
+
+void delete_from_position() {}
+
+
 int main() {
     int choice;
     int list_size;
@@ -159,6 +169,7 @@ int main() {
         printf("5. Insert at end\n");
         printf("6. Insert at position\n");
         printf("7. Insert after position\n");
+        printf("9. Delete From End\n");
         printf("0. Quit\n");
         scanf("%d", &choice);
 
@@ -184,6 +195,9 @@ int main() {
                 break;
             case 7:
                 insert_after_position(&head, &tail);
+                break;
+            case 9:
+                delete_from_end(&tail);
                 break;
             default:
                 printf("Invalid choice");

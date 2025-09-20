@@ -148,15 +148,26 @@ void insert_after_position(struct node **head, struct node **tail) {
 }
 
 void delete_from_beginning(struct node **head) {
-    *head = (*head)->next;
-    free((*head)->prev);
-    (*head)->prev = NULL;
+    if(*head == NULL) {
+        printf("List is empty");
+    } else {
+        *head = (*head)->next;
+        free((*head)->prev);
+        (*head)->prev = NULL;
+    }
 }
 
-void delete_from_end(struct node **tail) {
-    *tail = (*tail)->prev;
-    free((*tail)->next);
-    (*tail)->next = NULL;
+void delete_from_end(struct node **head, struct node **tail) {
+    if(*tail == NULL) {
+        printf("List is empty");
+    } else if ((*tail)->prev == NULL){
+        free(*tail);
+        *head = *tail = NULL;
+    } else {
+        *tail = (*tail)->prev;
+        free((*tail)->next);
+        (*tail)->next = NULL;
+    }
 }
 
 void delete_from_position() {}
@@ -206,7 +217,7 @@ int main() {
                 delete_from_beginning(&head);
                 break;
             case 9:
-                delete_from_end(&tail);
+                delete_from_end(&head, &tail);
                 break;
             default:
                 printf("Invalid choice");

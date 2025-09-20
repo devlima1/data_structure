@@ -147,9 +147,12 @@ void insert_after_position(struct node **head, struct node **tail) {
     }
 }
 
-void delete_from_beginning(struct node **head) {
+void delete_from_beginning(struct node **head, struct node **tail) {
     if(*head == NULL) {
         printf("List is empty");
+    } else if((*head)->next == NULL) {
+        free(*head);
+        *head = *tail = NULL;
     } else {
         *head = (*head)->next;
         free((*head)->prev);
@@ -214,7 +217,7 @@ int main() {
                 insert_after_position(&head, &tail);
                 break;
             case 8:
-                delete_from_beginning(&head);
+                delete_from_beginning(&head, &tail);
                 break;
             case 9:
                 delete_from_end(&head, &tail);

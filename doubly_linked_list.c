@@ -147,7 +147,12 @@ void insert_after_position(struct node **head, struct node **tail) {
     }
 }
 
-void delete_from_beginning() {}
+void delete_from_beginning(struct node **head) {
+    *head = (*head)->next;
+    free((*head)->prev);
+    (*head)->prev = NULL;
+}
+
 void delete_from_end(struct node **tail) {
     *tail = (*tail)->prev;
     free((*tail)->next);
@@ -169,6 +174,7 @@ int main() {
         printf("5. Insert at end\n");
         printf("6. Insert at position\n");
         printf("7. Insert after position\n");
+        printf("8. Delete from Beginning\n");
         printf("9. Delete From End\n");
         printf("0. Quit\n");
         scanf("%d", &choice);
@@ -195,6 +201,9 @@ int main() {
                 break;
             case 7:
                 insert_after_position(&head, &tail);
+                break;
+            case 8:
+                delete_from_beginning(&head);
                 break;
             case 9:
                 delete_from_end(&tail);

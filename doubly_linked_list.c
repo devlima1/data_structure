@@ -192,6 +192,20 @@ void delete_from_position(struct node **head) {
     free(temp);
 }
 
+void reverse(struct node **head, struct node **tail) {
+    struct node *current_node = *head;
+    struct node *next_node = NULL;
+
+    while (current_node != NULL) {
+        next_node = current_node->next;
+        current_node->next = current_node->prev;
+        current_node->prev = next_node;
+        current_node = next_node;
+    }
+    current_node = *head;
+    *head = *tail;
+    *tail = current_node;
+}
 
 int main() {
     int choice;
@@ -208,6 +222,7 @@ int main() {
         printf("8. Delete from Beginning\n");
         printf("9. Delete from End\n");
         printf("10. Delete from Position\n");
+        printf("11. Reverse List\n");
         printf("0. Quit\n");
         scanf("%d", &choice);
 
@@ -242,6 +257,9 @@ int main() {
                 break;
             case 10:
                 delete_from_position(&head);
+                break;
+            case 11:
+                reverse(&head, &tail);
                 break;
             default:
                 printf("Invalid choice");

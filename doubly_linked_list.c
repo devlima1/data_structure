@@ -162,16 +162,14 @@ void delete_from_beginning(struct node **head) {
     }
 }
 
-void delete_from_end(struct node **head, struct node **tail) {
+void delete_from_end(struct node **tail) {
     if(*tail == NULL) {
         printf("List is empty");
-    } else if ((*tail)->prev == NULL){
-        free(*tail);
-        *head = *tail = NULL;
     } else {
+        struct node *temp = *tail;
         *tail = (*tail)->prev;
-        free((*tail)->next);
         (*tail)->next = NULL;
+        free(temp);
     }
 }
 
@@ -222,7 +220,7 @@ int main() {
                 delete_from_beginning(&head);
                 break;
             case 9:
-                delete_from_end(&head, &tail);
+                delete_from_end(&tail);
                 break;
             default:
                 printf("Invalid choice");

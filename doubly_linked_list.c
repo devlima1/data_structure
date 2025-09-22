@@ -173,7 +173,24 @@ void delete_from_end(struct node **tail) {
     }
 }
 
-void delete_from_position() {}
+void delete_from_position(struct node **head) {
+    int pos;
+    int i = 1;
+
+    printf("Enter pos:");
+    scanf("%d", &pos);
+
+    struct node *temp = *head;
+
+    while(i < pos) {
+        temp = temp->next; 
+        i++;
+    }
+
+    temp->prev->next = temp->next;
+    temp->next->prev = temp->prev;
+    free(temp);
+}
 
 
 int main() {
@@ -189,7 +206,8 @@ int main() {
         printf("6. Insert at position\n");
         printf("7. Insert after position\n");
         printf("8. Delete from Beginning\n");
-        printf("9. Delete From End\n");
+        printf("9. Delete from End\n");
+        printf("10. Delete from Position\n");
         printf("0. Quit\n");
         scanf("%d", &choice);
 
@@ -221,6 +239,9 @@ int main() {
                 break;
             case 9:
                 delete_from_end(&tail);
+                break;
+            case 10:
+                delete_from_position(&head);
                 break;
             default:
                 printf("Invalid choice");

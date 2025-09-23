@@ -151,9 +151,12 @@ void insert_after_position(struct node **head, struct node **tail) {
     }
 }
 
-void delete_from_beginning(struct node **head) {
+void delete_from_beginning(struct node **head, struct node **tail) {
     if(*head == NULL) {
         printf("List is empty");
+    } else if ((*head)->next == NULL) {
+        free(*head);
+        *head = *tail = NULL;
     } else {
         struct node *temp = *head;
         *head = (*head)->next;
@@ -162,9 +165,12 @@ void delete_from_beginning(struct node **head) {
     }
 }
 
-void delete_from_end(struct node **tail) {
+void delete_from_end(struct node **head, struct node **tail) {
     if(*tail == NULL) {
         printf("List is empty");
+    } else if ((*tail)->prev == NULL) {
+        free(*tail);
+        *head = *tail = NULL;
     } else {
         struct node *temp = *tail;
         *tail = (*tail)->prev;
@@ -173,23 +179,33 @@ void delete_from_end(struct node **tail) {
     }
 }
 
-void delete_from_position(struct node **head) {
+void delete_from_position(struct node **head, struct node **tail) {
     int pos;
-    int i = 1;
 
     printf("Enter pos:");
     scanf("%d", &pos);
 
-    struct node *temp = *head;
+    int list_size = size(head);
 
-    while(i < pos) {
-        temp = temp->next; 
-        i++;
+    if (pos < 1 || pos > list_size) {
+        printf("Invalid position");
+    } else if (pos == 1) {
+        delete_from_beginning(head, tail);
+    } else if (pos == list_size) {
+        delete_from_end(head, tail);
+    } else {
+        int i = 1;
+        struct node *temp = *head;
+
+        while(i < pos) {
+            temp = temp->next; 
+            i++;
+        }
+
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        free(temp);
     }
-
-    temp->prev->next = temp->next;
-    temp->next->prev = temp->prev;
-    free(temp);
 }
 
 void reverse(struct node **head, struct node **tail) {
@@ -250,13 +266,13 @@ int main() {
                 insert_after_position(&head, &tail);
                 break;
             case 8:
-                delete_from_beginning(&head);
+                delete_from_beginning(&head, &tail);
                 break;
             case 9:
-                delete_from_end(&tail);
+                delete_from_end(&head, &tail);
                 break;
             case 10:
-                delete_from_position(&head);
+                delete_from_position(&head, &tail);
                 break;
             case 11:
                 reverse(&head, &tail);

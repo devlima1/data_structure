@@ -43,14 +43,14 @@ void display(struct node **head, struct node **temp) {
 
 int size(struct node **head) {
     struct node *temp = *head;
-    int size = 0;
+    int count = 0;
 
     while(temp != NULL) {
         temp = temp->next;
-        size++;
+        count++;
     }
 
-    return size;
+    return count;
 }
 
 void insert_at_beginning(struct node **head, struct node **tail) {

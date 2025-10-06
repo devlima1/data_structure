@@ -1,4 +1,4 @@
-## Data Structures
+## Data Structure
 
 This repository contains several implementations of data structures in C.
 

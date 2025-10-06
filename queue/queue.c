@@ -8,14 +8,14 @@ int front = -1;
 int rear = -1;
 
 bool is_full(int *rear) {
-    if(*rear == MAX_SIZE-1) {
+    if(*rear == MAX_SIZE - 1) {
         return true;
     }
     return false;
 }
 
-bool is_empty(int *front) {
-    if(*front == -1) {
+bool is_empty(int *front, int *rear) {
+    if(*front == -1 && *rear == -1) {
         return true;
     }
     return false;
@@ -24,10 +24,9 @@ bool is_empty(int *front) {
 void enqueue(int queue[], int *front, int *rear, int data) {
     if(is_full(rear)) {
         printf("Overflow\n");
-    } else if(*front == -1) {
-        (*front)++;
-        (*rear)++;
-        queue[*front] = data;
+    } else if(*front == -1 && *rear == -1) {
+        *front = *rear = 0;
+        queue[*rear] = data;
     } else {
         (*rear)++;
         queue[*rear] = data;
@@ -35,7 +34,7 @@ void enqueue(int queue[], int *front, int *rear, int data) {
 }
 
 void dequeue(int queue[], int *front, int *rear) {
-    if(is_empty(front)) {
+    if(is_empty(front, rear)) {
         printf("Underflow\n");
     } else if (*front == *rear){
         *front = *rear = -1;
@@ -44,8 +43,8 @@ void dequeue(int queue[], int *front, int *rear) {
     }
 }
 
-void peek(int queue[], int *front) {
-    if(is_empty(front)) {
+void peek(int queue[], int *front, int *rear) {
+    if(is_empty(front, rear)) {
         printf("List is empty\n");
     } else {
         printf("%d\n", queue[*front]);
@@ -53,10 +52,10 @@ void peek(int queue[], int *front) {
 }
 
 void display(int queue[], int *front, int *rear) {
-    if(is_empty(front)) {
+    if(is_empty(front, rear)) {
         printf("Queue is empty\n");
     } else {
-        for(int i = *front; i <= *rear; i++) {
+        for(int i = *front; i < (*rear) + 1; i++) {
             printf("%d ", queue[i]);
         }
         printf("\n");
@@ -85,7 +84,7 @@ int main() {
                 dequeue(queue, &front, &rear);
                 break;   
             case 3:
-                peek(queue, &front);
+                peek(queue, &front, &rear);
                 break;
             case 4:
                 display(queue, &front, &rear);
